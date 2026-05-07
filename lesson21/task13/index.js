@@ -1,9 +1,7 @@
-export function getSection(number) {
-  export function getSection(num) {
-    const spanEl = document.querySelector(`span[data-number="${num}"]`);
+export function getSection(num) {
+  const spanEl = document.querySelector(`span[data-number="${num}"]`);
 
-    const parentBox = spanEl.closest('.box');
+  const parentBox = spanEl.closest('.box');
 
-    return parentBox.dataset.section;
-  }
+  return parentBox.dataset.section;
 }
