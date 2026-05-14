@@ -57,3 +57,4 @@ const getSelectedSeat = (event) => {
 };
 
 arenaElement.addEventListener('click', getSelectedSeat);
+
