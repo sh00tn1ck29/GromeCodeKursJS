@@ -1,3 +1,4 @@
+
 const arenaElement = document.querySelector('.arena');
 const boardSelectedSeat = document.querySelector('.board__selected-seat');
 
@@ -48,7 +49,7 @@ const getSelectedSeat = (event) => {
   const seatNumber = event.target.dataset.seatNumber;
   const lineNumber = event.target.closest('.sector__line').dataset.lineNumber;
   const sectorNumber = event.target.closest('.sector').dataset.sectorNumber;
-  const seatSelected = event.target.classList.contains('.sector__seat');
+  const seatSelected = event.target.classList.contains('sector__seat');
 
   if (!seatSelected) {
     return;
@@ -57,4 +58,3 @@ const getSelectedSeat = (event) => {
 };
 
 arenaElement.addEventListener('click', getSelectedSeat);
-
