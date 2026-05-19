@@ -1,9 +1,31 @@
 const tasks = [
-  { text: 'Buy milk', done: false, id: 1 },
-  { text: 'Pick up Tom from airport', done: false, id: 2 },
-  { text: 'Visit party', done: false, id: 3 },
-  { text: 'Visit doctor', done: true, id: 4 },
-  { text: 'Buy meat', done: true, id: 5 },
+  { text: 'Buy milk', done: false, id: 1, createDate: new Date(2026, 4, 10) },
+  {
+    text: 'Pick up Tom from airport',
+    done: false,
+    id: 2,
+    createDate: new Date(2026, 4, 11),
+  },
+  {
+    text: 'Visit party',
+    done: false,
+    id: 3,
+    createDate: new Date(2026, 4, 12),
+  },
+  {
+    text: 'Visit doctor',
+    done: true,
+    id: 4,
+    createDate: new Date(2026, 4, 8),
+    doneDate: new Date(2026, 4, 8),
+  },
+  {
+    text: 'Buy meat',
+    done: true,
+    id: 5,
+    createDate: new Date(2026, 4, 9),
+    doneDate: new Date(2026, 4, 9),
+  },
 ];
 
 const listElem = document.querySelector('.list');
@@ -13,15 +35,25 @@ const taskInput = document.querySelector('.task-input');
 const renderTasks = (tasksList) => {
   listElem.innerHTML = '';
 
-  const tasksElems = tasksList
-    .sort((a, b) => a.done - b.done)
+  const tasksElems = [...tasksList]
+    .sort((a, b) => {
+      if (a.done !== b.done) {
+        return a.done - b.done;
+      }
+
+      if (!a.done) {
+        return b.createDate - a.createDate;
+      }
+
+      return b.doneDate - a.doneDate;
+    })
     .map(({ text, done, id }) => {
       const listItemElem = document.createElement('li');
       listItemElem.classList.add('list__item');
 
       const checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
-      checkbox.dataset.id = id; // Добавляем ID, чтобы знать, какую задачу кликнули
+      checkbox.dataset.id = id;
       checkbox.checked = done;
       checkbox.classList.add('list__item-checkbox');
 
@@ -44,6 +76,7 @@ const createTaskHandler = () => {
     text,
     done: false,
     id: Math.random(),
+    createDate: new Date(),
   });
 
   taskInput.value = '';
@@ -59,6 +92,7 @@ const toggleTaskHandler = (event) => {
 
   if (task) {
     task.done = event.target.checked;
+    task.doneDate = task.done ? new Date() : null;
     renderTasks(tasks);
   }
 };
@@ -67,3 +101,4 @@ createButton.addEventListener('click', createTaskHandler);
 listElem.addEventListener('click', toggleTaskHandler);
 
 renderTasks(tasks);
+
