@@ -1,6 +1,6 @@
 const listElem = document.querySelector('.list');
 
-export const renderTasks = (tasksList) => {
+export const renderTasks = (tasksList = []) => {
   listElem.innerHTML = '';
 
   const tasksElems = [...tasksList]
