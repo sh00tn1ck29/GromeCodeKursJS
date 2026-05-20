@@ -2,23 +2,20 @@ import { renderTasks } from './renderer.js';
 import { getItem, setItem } from './storage.js';
 
 export const onCreateTask = () => {
-  const taskTitleInputElem = document.querySelector('.task-input');
-  const text = taskTitleInputElem.value;
+  const inputElem = document.querySelector('.task-input');
+  const text = inputElem.value.trim();
 
-  if (!text) {
-    return;
-  }
+  if (text === '') return;
 
-  taskTitleInputElem.value = '';
   const tasksList = getItem('tasksList') || [];
 
   const newTasksList = tasksList.concat({
-    text,
+    id: Math.random().toString(36).substring(2, 9),
+    text: text,
     done: false,
-    createDate: new Date().toISOString(),
-    id: Math.random().toString(),
   });
 
+  inputElem.value = '';
   setItem('tasksList', newTasksList);
   renderTasks();
 };
