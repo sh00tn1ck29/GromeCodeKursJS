@@ -5,7 +5,7 @@ export const setItem = (key, value) => {
 export const getItem = (key) => {
   const value = localStorage.getItem(key);
   try {
-    return JSON.parse(value);
+    return value ? JSON.parse(value) : null;
   } catch (e) {
     return null;
   }
