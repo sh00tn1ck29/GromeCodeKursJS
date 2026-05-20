@@ -10,11 +10,9 @@ export const onToggleTask = (event) => {
 
   const newTasksList = tasksList.map((task) => {
     if (task.id === taskId) {
-      const done = event.target.checked;
       return {
         ...task,
-        done,
-        doneDate: done ? new Date().toISOString() : null,
+        done: event.target.checked,
       };
     }
     return task;
