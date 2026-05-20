@@ -12,9 +12,12 @@ export const toggleTaskHandler = (event) => {
 
   if (task) {
     task.done = event.target.checked;
-    task.doneDate = task.done ? new Date() : null;
+    task.doneDate = task.done ? new Date().toISOString() : null;
+    
 
     setItem('tasksList', tasks);
+    
+ 
     renderTasks(tasks);
   }
 };
