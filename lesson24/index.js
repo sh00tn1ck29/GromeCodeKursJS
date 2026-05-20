@@ -1,104 +1,77 @@
-const tasks = [
-  { text: 'Buy milk', done: false, id: 1, createDate: new Date(2026, 4, 10) },
-  {
-    text: 'Pick up Tom from airport',
-    done: false,
-    id: 2,
-    createDate: new Date(2026, 4, 11),
-  },
-  {
-    text: 'Visit party',
-    done: false,
-    id: 3,
-    createDate: new Date(2026, 4, 12),
-  },
-  {
-    text: 'Visit doctor',
-    done: true,
-    id: 4,
-    createDate: new Date(2026, 4, 8),
-    doneDate: new Date(2026, 4, 8),
-  },
-  {
-    text: 'Buy meat',
-    done: true,
-    id: 5,
-    createDate: new Date(2026, 4, 9),
-    doneDate: new Date(2026, 4, 9),
-  },
-];
+* {
+  box-sizing: border-box;
+}
 
-const listElem = document.querySelector('.list');
-const createButton = document.querySelector('.create-task-btn');
-const taskInput = document.querySelector('.task-input');
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-const renderTasks = (tasksList) => {
-  listElem.innerHTML = '';
+.title {
+  font-size: 24px;
+  text-transform: uppercase;
+  text-align: center;
+}
 
-  const tasksElems = [...tasksList]
-    .sort((a, b) => {
-      if (a.done !== b.done) {
-        return a.done - b.done;
-      }
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  background-color: coral;
+  border-radius: 8px;
+  padding: 8px;
+  max-width: 600px;
+  margin: auto;
+}
 
-      if (!a.done) {
-        return b.createDate - a.createDate;
-      }
+.list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  margin: auto;
+  width: 100%;
+}
 
-      return b.doneDate - a.doneDate;
-    })
-    .map(({ text, done, id }) => {
-      const listItemElem = document.createElement('li');
-      listItemElem.classList.add('list__item');
+.list__item {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-radius: 8px;
+  background-color: wheat;
+  margin-bottom: 8px;
+  padding: 8px;
+}
 
-      const checkbox = document.createElement('input');
-      checkbox.setAttribute('type', 'checkbox');
-      checkbox.dataset.id = id;
-      checkbox.checked = done;
-      checkbox.classList.add('list__item-checkbox');
+.list__item_done {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
 
-      if (done) {
-        listItemElem.classList.add('list__item_done');
-      }
+.list__item:last-child {
+  margin-bottom: 0;
+}
 
-      listItemElem.append(checkbox, text);
-      return listItemElem;
-    });
+.list__item-checkbox {
+  margin-right: 8px;
+}
 
-  listElem.append(...tasksElems);
-};
+.btn {
+  height: 32px;
+  min-width: 64px;
+  border: 3px solid #ccc;
+  outline: none;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-left: 16px;
+}
 
-const createTaskHandler = () => {
-  const text = taskInput.value;
-  if (!text) return;
+.actions {
+  display: flex;
+  margin-bottom: 8px;
+}
 
-  tasks.push({
-    text,
-    done: false,
-    id: Math.random(),
-    createDate: new Date(),
-  });
-
-  taskInput.value = '';
-  renderTasks(tasks);
-};
-
-const toggleTaskHandler = (event) => {
-  const isCheckbox = event.target.classList.contains('list__item-checkbox');
-  if (!isCheckbox) return;
-
-  const taskId = Number(event.target.dataset.id);
-  const task = tasks.find((item) => item.id === taskId);
-
-  if (task) {
-    task.done = event.target.checked;
-    task.doneDate = task.done ? new Date() : null;
-    renderTasks(tasks);
-  }
-};
-
-createButton.addEventListener('click', createTaskHandler);
-listElem.addEventListener('click', toggleTaskHandler);
-
-renderTasks(tasks);
-
+.task-input {
+  height: 32px;
+  border: 3px solid #ccc;
+  border-radius: 8px;
+  flex: 1;
+}
