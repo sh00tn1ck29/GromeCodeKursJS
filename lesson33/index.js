@@ -29,4 +29,3 @@ const onSearchUser = () => {
 };
 
 showUserBtnElem.addEventListener('click', onSearchUser);
-y
