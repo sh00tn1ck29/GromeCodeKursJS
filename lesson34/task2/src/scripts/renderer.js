@@ -27,16 +27,16 @@ export const renderTasks = (tasksList) => {
         listItemElem.classList.add('list__item_done');
       }
 
-      // Текст задачи оборачиваем в спан для красоты и структуры
+
       const textElem = document.createElement('span');
       textElem.textContent = text;
 
-      // Добавляем кнопку удаления
+     
       const deleteBtnElem = document.createElement('button');
       deleteBtnElem.classList.add('list__item-delete-btn');
       deleteBtnElem.dataset.id = id;
-      deleteBtnElem.textContent = '+'; // Или 'X', или любой символ удаления
-      deleteBtnElem.style.marginLeft = 'auto'; // Сдвинет кнопку вправо
+      deleteBtnElem.textContent = '+';
+      deleteBtnElem.style.marginLeft = 'auto'; 
 
       listItemElem.append(checkbox, textElem, deleteBtnElem);
       return listItemElem;
