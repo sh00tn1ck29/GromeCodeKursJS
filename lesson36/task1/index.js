@@ -41,7 +41,7 @@ const onSearchUser = async () => {
     
     userAvatarElem.src = userData.avatar_url;
     userNameElem.textContent = userData.name || '';
-    userLocationElem.textContent = userData.location || '';
+    userLocationElem.textContent = userData.location ? `from ${userData.location}` : '';
     
     const reposList = await fetchRepositories(userData.repos_url);
     renderRepos(reposList);
