@@ -1,7 +1,7 @@
 import { fetchUserData, fetchRepositories } from './gateway.js';
 import { showSpinner, hideSpinner } from './spinner.js';
 
-const defaultAvatar = 'https://avatars3.githubusercontent.com/u/10001';
+const defaultAvatar = 'https://avatars3.githubusercontent.com/u10001';
 const userAvatarElem = document.querySelector('.user__avatar');
 const userNameElem = document.querySelector('.user__name');
 const userLocationElem = document.querySelector('.user__location');
